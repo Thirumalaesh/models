@@ -1276,7 +1276,7 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edge_color=color,
           keypoint_edge_width=line_thickness // 2)
     for i in range(0, len(ppoints)):
-        cv2.line(image, (ppoints[i][0],ppoints[i][1]),(ppoints[i][2],ppoints[i][3]),(0,255,255),4)
+        cv2.line(image, (int(ppoints[i][0]),int(ppoints[i][1])),(int(ppoints[i][2]),int(ppoints[i][3])),(0,255,255),4)
 
   return image
 
