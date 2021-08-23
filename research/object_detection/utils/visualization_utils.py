@@ -156,13 +156,13 @@ def draw_bounding_box_on_image_array(image,
     use_normalized_coordinates: If True (default), treat coordinates
       ymin, xmin, ymax, xmax as relative to the image.  Otherwise treat
       coordinates as absolute.
-  """
+  
   image_pil = Image.fromarray(np.uint8(image)).convert('RGB')
   draw_bounding_box_on_image(image_pil, ymin, xmin, ymax, xmax, color,
                              thickness, display_str_list,
                              use_normalized_coordinates)
   np.copyto(image, np.array(image_pil))
-
+"""
 
 def draw_bounding_box_on_image(image,
                                ymin,
@@ -1286,7 +1286,7 @@ def visualize_boxes_and_labels_on_image_array(
         display_str_list=box_to_display_str_map[box],
         use_normalized_coordinates=use_normalized_coordinates)
     #ppoints.append([x,y])
-    draw_derive_circle(image,xmin,ymin,xmax,ymax, color)
+    #draw_derive_circle(image,xmin,ymin,xmax,ymax, color)
     if keypoints is not None:
       keypoint_scores_for_box = None
       if box_to_keypoint_scores_map:
