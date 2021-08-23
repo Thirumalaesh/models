@@ -209,6 +209,10 @@ def draw_bounding_box_on_image(image,
                (left, top)],
               width=thickness,
               fill=color)
+    x = left + right//2
+    y = top + bottom//2
+    draw.point((x,y),fill=color)
+    draw.arc([left,top,right,bottom],0,360,fill=color)
   try:
     font = ImageFont.truetype('arial.ttf', 24)
   except IOError:
@@ -1097,7 +1101,7 @@ def draw_float_channel_on_image_array(image, channel, mask, alpha=0.9,
   pil_mask = Image.fromarray(np.uint8(255.0 * alpha * (mask > 0))).convert('L')
   pil_image = Image.composite(pil_colored_channel, pil_image, pil_mask)
   np.copyto(image, np.array(pil_image.convert('RGB')))
-
+"""
 def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
     print("enter")
     image_pil = image
@@ -1119,7 +1123,7 @@ def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
     draw.arc([left,top,right,bottom],0,360,fill=color)
     print("enter6")
     np.copyto(image, np.array(image_pil))
-
+"""
 
 def visualize_boxes_and_labels_on_image_array(
     image,
