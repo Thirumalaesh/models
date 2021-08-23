@@ -24,6 +24,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
+import cv2
 import collections
 # Set headless-friendly backend.
 import matplotlib; matplotlib.use('Agg')  # pylint: disable=multiple-statements
@@ -1181,6 +1182,7 @@ def visualize_boxes_and_labels_on_image_array(
   box_to_keypoints_map = collections.defaultdict(list)
   box_to_keypoint_scores_map = collections.defaultdict(list)
   box_to_track_ids_map = {}
+  ppoints=[]
   if not max_boxes_to_draw:
     max_boxes_to_draw = boxes.shape[0]
   for i in range(boxes.shape[0]):
@@ -1233,6 +1235,7 @@ def visualize_boxes_and_labels_on_image_array(
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
     ymin, xmin, ymax, xmax = box
+    ppoints.append([xmin,ymin,xmax,ymax])
     if instance_masks is not None:
       draw_mask_on_image_array(
           image,
@@ -1272,6 +1275,8 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edges=keypoint_edges,
           keypoint_edge_color=color,
           keypoint_edge_width=line_thickness // 2)
+     for i in len(0, len(ppoints)):
+       cv2.line(image, (ppoints[i][0],ppoints[i][1]),(ppoints[i][2],ppoints[i][3]),(0,255,255),4)
 
   return image
 
