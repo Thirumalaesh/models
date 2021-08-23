@@ -1235,7 +1235,7 @@ def visualize_boxes_and_labels_on_image_array(
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
     ymin, xmin, ymax, xmax = box
-    ppoints.append([int(xmin),int(ymin),int(xmax),int(ymax)])
+    ppoints.append([xmin,ymin,xmax,ymax])
     if instance_masks is not None:
       draw_mask_on_image_array(
           image,
