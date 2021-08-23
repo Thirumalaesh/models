@@ -1098,6 +1098,27 @@ def draw_float_channel_on_image_array(image, channel, mask, alpha=0.9,
   pil_image = Image.composite(pil_colored_channel, pil_image, pil_mask)
   np.copyto(image, np.array(pil_image.convert('RGB')))
 
+def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
+    print("enter")
+    image_pil = Image.fromarray(image)
+    print("enter1")
+    draw = ImageDraw.Draw(image_pil)
+    print("enter2")
+    im_width, im_height = image_pil.size
+    print("enter3")
+    (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
+                                  ymin * im_height, ymax * im_height)
+    x = left + right//2
+    y = top + bottom//2
+  #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
+  #           (left, top)],width=thickness,fill=color)
+    print("enter4")
+    draw.point((x,y),fill=color)
+    print("enter5")
+    draw.arc([left,top,right,bottom],0,360,fill=color)
+    print("enter6")
+    np.copyto(image, np.array(image_pil))
+
 
 def visualize_boxes_and_labels_on_image_array(
     image,
@@ -1231,27 +1252,6 @@ def visualize_boxes_and_labels_on_image_array(
         else:
           box_to_color_map[box] = STANDARD_COLORS[
               classes[i] % len(STANDARD_COLORS)]
-        
-  def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
-    print("enter")
-    image_pil = Image.fromarray(image)
-    print("enter1")
-    draw = ImageDraw.Draw(image_pil)
-    print("enter2")
-    im_width, im_height = image_pil.size
-    print("enter3")
-    (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
-                                  ymin * im_height, ymax * im_height)
-    x = left + right//2
-    y = top + bottom//2
-  #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
-  #           (left, top)],width=thickness,fill=color)
-    print("enter4")
-    draw.point((x,y),fill=color)
-    print("enter5")
-    draw.arc([left,top,right,bottom],0,360,fill=color)
-    print("enter6")
-    np.copyto(image, np.array(image_pil))
 
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
