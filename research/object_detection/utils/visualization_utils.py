@@ -1234,7 +1234,7 @@ def visualize_boxes_and_labels_on_image_array(
         
   def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
     print("enter")
-    image_pil = Image.fromarray(np.uint8(image)).convert('RGB')
+    image_pil = Image.fromarray(image)
     print("enter1")
     draw = ImageDraw.Draw(image_pil)
     print("enter2")
