@@ -10,7 +10,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License
 # ==============================================================================
 
 """A set of functions that are used for visualization.
@@ -1235,7 +1235,6 @@ def visualize_boxes_and_labels_on_image_array(
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
     ymin, xmin, ymax, xmax = box
-    ppoints.append([xmin,ymin,xmax,ymax])
     if instance_masks is not None:
       draw_mask_on_image_array(
           image,
@@ -1260,6 +1259,8 @@ def visualize_boxes_and_labels_on_image_array(
         thickness=0 if skip_boxes else line_thickness,
         display_str_list=box_to_display_str_map[box],
         use_normalized_coordinates=use_normalized_coordinates)
+    #ppoints.append([x,y])
+    draw_derive_circle(image,xmin,ymin,xmax,ymax, color)
     if keypoints is not None:
       keypoint_scores_for_box = None
       if box_to_keypoint_scores_map:
@@ -1275,10 +1276,21 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edges=keypoint_edges,
           keypoint_edge_color=color,
           keypoint_edge_width=line_thickness // 2)
-    print(points,"ccc")
 
   return image, ppoints
 
+def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
+  draw = ImageDraw.Draw(image)
+  im_width, im_height = image.size
+  (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
+                                  ymin * im_height, ymax * im_height)
+  x = left + right//2
+  y = top + bottom//2
+  #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
+  #           (left, top)],width=thickness,fill=color)
+  draw.point((x,y),fill=color)
+  draw.arc([left,right,top,bottom],0,360,fill=color)
+    
 
 def add_cdf_image_summary(values, name):
   """Adds a tf.summary.image for a CDF plot of the values.
