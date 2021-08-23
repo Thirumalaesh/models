@@ -1182,7 +1182,7 @@ def visualize_boxes_and_labels_on_image_array(
   box_to_keypoints_map = collections.defaultdict(list)
   box_to_keypoint_scores_map = collections.defaultdict(list)
   box_to_track_ids_map = {}
-  #ppoints=[]
+  ppoints=[]
   if not max_boxes_to_draw:
     max_boxes_to_draw = boxes.shape[0]
   for i in range(boxes.shape[0]):
@@ -1235,7 +1235,7 @@ def visualize_boxes_and_labels_on_image_array(
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
     ymin, xmin, ymax, xmax = box
-    #ppoints.append([int(xmin),int(ymin),int(xmax),int(ymax)])
+    ppoints.append([int(xmin),int(ymin),int(xmax),int(ymax)])
     if instance_masks is not None:
       draw_mask_on_image_array(
           image,
@@ -1276,9 +1276,8 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edge_color=color,
           keypoint_edge_width=line_thickness // 2)
     print(xmin,ymin,xmax,ymax,"ccc")
-    cv2.line(image, (xmin,ymin),(xmax,ymax),(0,255,255),4)
 
-  return image
+  return image, ppoints
 
 
 def add_cdf_image_summary(values, name):
