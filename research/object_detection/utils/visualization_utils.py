@@ -1280,6 +1280,7 @@ def visualize_boxes_and_labels_on_image_array(
   return image, ppoints
 
 def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
+  print("enter")
   draw = ImageDraw.Draw(image)
   im_width, im_height = image.size
   (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
@@ -1289,7 +1290,7 @@ def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
   #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
   #           (left, top)],width=thickness,fill=color)
   draw.point((x,y),fill=color)
-  draw.arc([left,right,top,bottom],0,360,fill=color)
+  draw.arc([left,top,right,bottom],0,360,fill=color)
     
 
 def add_cdf_image_summary(values, name):
