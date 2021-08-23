@@ -1231,6 +1231,19 @@ def visualize_boxes_and_labels_on_image_array(
         else:
           box_to_color_map[box] = STANDARD_COLORS[
               classes[i] % len(STANDARD_COLORS)]
+        
+  def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
+  print("enter")
+  draw = ImageDraw.Draw(image)
+  im_width, im_height = image.size
+  (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
+                                  ymin * im_height, ymax * im_height)
+  x = left + right//2
+  y = top + bottom//2
+  #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
+  #           (left, top)],width=thickness,fill=color)
+  draw.point((x,y),fill=color)
+  draw.arc([left,top,right,bottom],0,360,fill=color)
 
   # Draw all boxes onto image.
   for box, color in box_to_color_map.items():
@@ -1278,19 +1291,6 @@ def visualize_boxes_and_labels_on_image_array(
           keypoint_edge_width=line_thickness // 2)
 
   return image, ppoints
-
-def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
-  print("enter")
-  draw = ImageDraw.Draw(image)
-  im_width, im_height = image.size
-  (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
-                                  ymin * im_height, ymax * im_height)
-  x = left + right//2
-  y = top + bottom//2
-  #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
-  #           (left, top)],width=thickness,fill=color)
-  draw.point((x,y),fill=color)
-  draw.arc([left,top,right,bottom],0,360,fill=color)
     
 
 def add_cdf_image_summary(values, name):
