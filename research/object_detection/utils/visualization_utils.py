@@ -1100,7 +1100,7 @@ def draw_float_channel_on_image_array(image, channel, mask, alpha=0.9,
 
 def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
     print("enter")
-    image_pil = Image.fromarray(image)
+    image_pil = Image.fromarray(np.unit8(image)).convert('RGB')
     print("enter1")
     draw = ImageDraw.Draw(image_pil)
     print("enter2")
