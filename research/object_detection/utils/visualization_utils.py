@@ -1235,16 +1235,22 @@ def visualize_boxes_and_labels_on_image_array(
   def draw_derive_circle(image,xmin,ymin,xmax,ymax,color):
     print("enter")
     image_pil = Image.fromarray(np.uint8(image)).convert('RGB')
+    print("enter1")
     draw = ImageDraw.Draw(image_pil)
+    print("enter2")
     im_width, im_height = image_pil.size
+    print("enter3")
     (left, right, top, bottom) = (xmin * im_width, xmax * im_width,
                                   ymin * im_height, ymax * im_height)
     x = left + right//2
     y = top + bottom//2
   #draw.line([(left, top), (left, bottom), (right, bottom), (right, top),
   #           (left, top)],width=thickness,fill=color)
+    print("enter4")
     draw.point((x,y),fill=color)
+    print("enter5")
     draw.arc([left,top,right,bottom],0,360,fill=color)
+    print("enter6")
     np.copyto(image, np.array(image_pil))
 
   # Draw all boxes onto image.
